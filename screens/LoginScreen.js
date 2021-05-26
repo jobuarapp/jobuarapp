@@ -42,7 +42,7 @@ const LoginScreen = (props) => {
 						</View>
 						<View style={styles.socialLoginBorderLine} />
 					</View>
-					<View>
+					<View style={{ marginBottom: Dimensions.get('window').height * 0.03 }}>
 						<Text>Social Icons here: gmail, facebook, instagram</Text>
 					</View>
 					<View style={styles.noAccContainer}>
@@ -72,15 +72,15 @@ const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
 	},
-	// logoContainer: {
-	// 	height: 160,
-	// 	width: 160,
-	// 	alignItems: 'center',
-	// 	backgroundColor: Colors.mainBackg,
-	// 	overflow: 'hidden',
-	// 	borderRadius: 15,
-	// 	marginTop: Dimensions.get('window').height * 0.03,
-	// },
+	logoContainer: {
+		height: 160,
+		width: 160,
+		alignItems: 'center',
+		backgroundColor: Colors.mainBackg,
+		overflow: 'hidden',
+		borderRadius: 15,
+		marginTop: Dimensions.get('window').height * 0.03,
+	},
 	logo: { height: 150, width: 150 },
 	inputContainer: {
 		borderColor: 'black',
@@ -105,7 +105,11 @@ const styles = StyleSheet.create({
 	},
 	forgotPassContainer: { marginVertical: Dimensions.get('window').height * 0.02 },
 	forgotPassTxt: { color: Colors.mainBackg, fontSize: 16, fontFamily: 'poppins-regular' },
-	socialLoginMainContainer: { flexDirection: 'row', alignItems: 'center' },
+	socialLoginMainContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginVertical: Dimensions.get('window').height * 0.03,
+	},
 	socialLoginBorderLine: {
 		borderWidth: 0.8,
 		height: 0.5,
