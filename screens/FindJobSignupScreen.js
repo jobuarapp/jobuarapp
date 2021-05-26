@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
 	View,
 	Text,
@@ -13,8 +13,11 @@ import {
 } from 'react-native';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import PhoneInput from 'react-native-phone-number-input';
 
 const FindJobSignupScreen = (props) => {
+	const [phone, setPhone] = useState('');
+	const phoneInput = useRef(null);
 	return (
 		<KeyboardAvoidingView enabled behavior="height" keyboardVerticalOffset={80} style={styles.mainContainer}>
 			<ScrollView showsVerticalScrollIndicator={false}>
@@ -28,9 +31,37 @@ const FindJobSignupScreen = (props) => {
 					<View style={styles.txtFieldInputContainer}>
 						<TextInput style={{ padding: 10 }} placeholder="Email" />
 					</View>
-					<View style={styles.txtFieldInputContainer}>
+					{/* <View style={styles.txtFieldInputContainer}>
 						<TextInput style={{ padding: 10 }} placeholder="Mobile number" />
-					</View>
+					</View> */}
+					<PhoneInput
+						placeholder="Mobile Number"
+						// onChangeText={(phone) => setPhone(phone)}
+						textContainerStyle={{
+							backgroundColor: 'transparent',
+						}}
+						containerStyle={{
+							...styles.txtFieldInputContainer,
+							...{ height: Platform.OS === 'android' ? 50 : 45 },
+						}}
+						textInputStyle={{
+							color: Colors.mainBackg,
+							fontSize: 14,
+							fontFamily: 'poppins-regular',
+							alignItems: 'center',
+							top: Platform.OS === 'ios' ? 1 : 0,
+						}}
+						ref={phoneInput}
+						defaultValue={phone}
+						defaultCode="SG"
+						onChangeFormattedText={(phone) => {
+							setPhone(phone);
+						}}
+						codeTextStyle={{ color: Colors.mainBackg, fontSize: 14, fontFamily: 'poppins-regular' }}
+						// withDarkTheme
+						// withShadow
+						// autoFocus
+					/>
 					<View style={styles.txtFieldInputContainer}>
 						<TextInput style={{ padding: 10 }} placeholder="Password" />
 					</View>
@@ -42,7 +73,10 @@ const FindJobSignupScreen = (props) => {
 							</Text>
 						</View>
 					</View>
-					<TouchableOpacity style={styles.signupBtnContainer}>
+					<TouchableOpacity
+						onPress={() => props.navigation.navigate('Otp')}
+						style={styles.signupBtnContainer}
+					>
 						<Text style={styles.signupBtnTxt}>Sign up</Text>
 					</TouchableOpacity>
 					<View style={styles.socialLoginMainContainer}>
@@ -143,7 +177,16 @@ const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
 	},
-	logo: { height: 150, width: 150 },
+	logoContainer: {
+		height: 140,
+		width: 140,
+		alignItems: 'center',
+		backgroundColor: Colors.mainBackg,
+		overflow: 'hidden',
+		borderRadius: 15,
+		marginTop: Dimensions.get('window').height * 0.03,
+	},
+	logo: { height: 130, width: 130 },
 	txtFieldInputContainer: {
 		borderColor: 'black',
 		borderWidth: 0.8,

@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Colors from '../constants/Colors';
+import LogoSplashScreen from '../screens/LogoSplashScreen';
 import MainScreen, { screenOptions } from '../screens/MainScreen';
 import FindJobSignupScreen, { FindJobSignupScreenOptions } from '../screens/FindJobSignupScreen';
 import PostJobSignupCompScreen, { PostJobSignupCompScreenOptions } from '../screens/PostJobSignupCompScreen';

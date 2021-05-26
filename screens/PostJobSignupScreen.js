@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
 	View,
 	Text,
@@ -13,8 +13,11 @@ import {
 } from 'react-native';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import PhoneInput from 'react-native-phone-number-input';
 
 const PostJobSignupScreen = (props) => {
+	const [phone, setPhone] = useState('');
+	const phoneInput = useRef(null);
 	return (
 		<KeyboardAvoidingView enabled behavior="height" keyboardVerticalOffset={80} style={styles.mainContainer}>
 			<ScrollView showsVerticalScrollIndicator={false}>
@@ -23,16 +26,44 @@ const PostJobSignupScreen = (props) => {
 						<Image source={require('../assets/jobuar-logo.jpg')} style={styles.logo} resizeMode="contain" />
 					</View>
 					<View style={styles.txtFieldInputContainer}>
-						<TextInput style={styles.inputTextField} placeholder="Full name" />
+						<TextInput style={styles.inputTextField} placeholder="Full name*" />
 					</View>
 					<View style={styles.txtFieldInputContainer}>
-						<TextInput style={styles.inputTextField} placeholder="Email" />
+						<TextInput style={styles.inputTextField} placeholder="Email*" />
 					</View>
+					{/* <View style={styles.txtFieldInputContainer}> */}
+					{/* <TextInput style={styles.inputTextField} placeholder="Mobile number*" /> */}
+					{/* </View> */}
+					<PhoneInput
+						placeholder="Mobile Number"
+						// onChangeText={(phone) => setPhone(phone)}
+						textContainerStyle={{
+							backgroundColor: 'transparent',
+						}}
+						containerStyle={{
+							...styles.txtFieldInputContainer,
+							...{ height: Platform.OS === 'android' ? 50 : 45 },
+						}}
+						textInputStyle={{
+							color: Colors.mainBackg,
+							fontSize: 14,
+							fontFamily: 'poppins-regular',
+							alignItems: 'center',
+							top: Platform.OS === 'ios' ? 1 : 0,
+						}}
+						ref={phoneInput}
+						defaultValue={phone}
+						defaultCode="SG"
+						onChangeFormattedText={(phone) => {
+							setPhone(phone);
+						}}
+						codeTextStyle={{ color: Colors.mainBackg, fontSize: 14, fontFamily: 'poppins-regular' }}
+						// withDarkTheme
+						// withShadow
+						// autoFocus
+					/>
 					<View style={styles.txtFieldInputContainer}>
-						<TextInput style={styles.inputTextField} placeholder="Mobile number" />
-					</View>
-					<View style={styles.txtFieldInputContainer}>
-						<TextInput style={styles.inputTextField} placeholder="Password" />
+						<TextInput style={styles.inputTextField} placeholder="Password*" />
 					</View>
 					<View style={{ marginHorizontal: Dimensions.get('window').width * 0.08 }}>
 						<View style={styles.checkboxContainer}>
@@ -48,6 +79,16 @@ const PostJobSignupScreen = (props) => {
 					>
 						<Text style={styles.signupBtnTxt}>Sign up</Text>
 					</TouchableOpacity>
+					<View style={styles.socialLoginMainContainer}>
+						<View style={styles.socialLoginBorderLine} />
+						<View style={styles.socialLoginTxtContainer}>
+							<Text style={styles.socialLoginTxt}>Or login via</Text>
+						</View>
+						<View style={styles.socialLoginBorderLine} />
+					</View>
+					<View style={{ marginBottom: Dimensions.get('window').height * 0.03 }}>
+						<Text>Social Icons here: gmail, facebook, instagram</Text>
+					</View>
 					<View style={styles.accContainer}>
 						<Text style={styles.accTxt}>Already have an account? </Text>
 						<TouchableOpacity>
@@ -73,7 +114,16 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.white,
 	},
 	container: { alignItems: 'center' },
-	logo: { height: 150, width: 150 },
+	logoContainer: {
+		height: 140,
+		width: 140,
+		alignItems: 'center',
+		backgroundColor: Colors.mainBackg,
+		overflow: 'hidden',
+		borderRadius: 15,
+		marginTop: Dimensions.get('window').height * 0.03,
+	},
+	logo: { height: 130, width: 130 },
 	txtFieldInputContainer: {
 		borderColor: 'black',
 		borderWidth: 0.8,
@@ -81,7 +131,7 @@ const styles = StyleSheet.create({
 		width: Dimensions.get('window').width * 0.9,
 		marginVertical: 10,
 	},
-	inputTextField: { padding: 10 },
+	inputTextField: { color: Colors.mainBackg, fontSize: 14, fontFamily: 'poppins-regular', padding: 10 },
 	// mainCheckboxContainer: { marginHorizontal: Dimensions.get('window').width * 0.04 },
 	checkboxContainer: {
 		flexDirection: 'row',
@@ -102,6 +152,19 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontFamily: 'poppins-bold',
 	},
+	socialLoginMainContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginVertical: Dimensions.get('window').height * 0.03,
+	},
+	socialLoginBorderLine: {
+		borderWidth: 0.8,
+		height: 0.5,
+		width: Dimensions.get('window').width,
+		backgroundColor: Colors.inActive,
+	},
+	socialLoginTxtContainer: { marginHorizontal: Dimensions.get('window').width * 0.03 },
+	socialLoginTxt: { color: Colors.mainBackg, fontSize: 14, fontFamily: 'poppins-regular' },
 	accContainer: {
 		flexDirection: 'row',
 		marginBottom: Dimensions.get('window').height * 0.05,

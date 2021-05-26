@@ -59,7 +59,16 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: Colors.white,
 	},
-	logo: { height: 150, width: 150 },
+	logoContainer: {
+		height: 140,
+		width: 140,
+		alignItems: 'center',
+		backgroundColor: Colors.mainBackg,
+		overflow: 'hidden',
+		borderRadius: 15,
+		marginTop: Dimensions.get('window').height * 0.03,
+	},
+	logo: { height: 130, width: 130 },
 	verifyTxtContainer: {
 		marginHorizontal: Dimensions.get('window').width * 0.07,
 	},
